@@ -1,4 +1,4 @@
-const CACHE='family-portfolio-v12a1-shell-20261125';
+const CACHE='family-portfolio-v13a-shell-20261125';
 const SHELL=['./index.html','./app.js','./robinhood.js','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)));self.skipWaiting()});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('family-portfolio-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
