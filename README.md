@@ -1,23 +1,10 @@
-# Family Portfolio V1.2A — Connected checkpoint
+# Family Portfolio V1.2A.1 — ticker and valuation checkpoint
 
-This build replaces the demo with an invite-only Supabase-connected workspace. It is a deployment/testing checkpoint, not a production security certification.
+Deploy by replacing the root files of the existing GitHub Pages repository. The original 01 and 02 SQL scripts are still sufficient; no new SQL or schema changes. Existing Supabase data and session settings are retained. Open in a fresh private window after deployment.
 
-## Deploy in order
-
-1. In the existing project's SQL Editor, run `Family_Portfolio_02_Connected.sql` (supplied separately). Expect six function rows: `anon_can_execute=false`, `authenticated_can_execute=true`, `pinned_search_path=true`.
-2. Confirm Authentication: disable public and anonymous sign-up; retain Email/password. Set Site URL and allowed redirect URL to `https://caichengxin.github.io/family-portfolio/`.
-3. Extract this ZIP and upload its contents (not the ZIP itself) into the root of the existing GitHub repository. Replace index.html, sw.js, manifest.webmanifest and icons. Add app.js and robinhood.js. Keep `main` / root deployment. No SQL, screenshots, private keys, or test data should be published.
-4. When the Pages deployment succeeds, open the URL using a private/incognito window, sign in with the already-created administrator account, and verify an empty portfolio. Use synthetic balances/holdings only during testing.
-5. Test creating an IRA account, updating a holding, reloading on another device, and signing out. Confirm no unauthenticated data is exposed. Before using real data, create and test a second Member using the next setup step, check sharing opt-in and revocation, and verify cross-member write attempts fail.
-
-## Included
-- Email/password authentication, role derived from verified membership, sign-out.
-- RLS-scoped reads. Narrow RPCs for group creation, own accounts, holdings, balances, annual contribution totals and personal limit, financial sharing consent, notification acknowledgement. Account revision check and database audit entries.
-- Robinhood text parser and local Tesseract OCR loader reused from V1.1, editable import review, IRA routing check, no automatic holding deletion, cumulative contributions.
-- Group summary, account views, mobile responsive shell, PWA manifest and service worker. No real portfolio records included. No financial records stored by the service worker. Supabase session token and theme preference use browser storage.
-- Manual/screenshot reference prices only; unpriced holdings and unknown cash/Buying Power do not become zero. Broker-reported assets and calculated estimates are separate.
-
-## Not yet connected
-- Member enrollment UI, trade execution recording, buy-plan publishing, recurring reminders, price service, email or Push delivery. Existing database plans/alerts can be read, but no simulated sends.
-- Existing browser demo data is not migrated. Actual backend login, RPCs, RLS between two users, CDN OCR and PWA install require live validation. No real financial data before validation.
-- The supplied publishable key is browser-safe; no secret or service-role key belongs in the repository. The UI is public, data access is protected by Supabase auth/RLS. Third-party SDK and OCR assets are fetched at runtime from pinned CDN paths.
+- Starter directory of 121 common U.S. stock/ETF symbols and names, maintained locally. It is not an exhaustive or live listing. Choose a suggestion or explicitly verify an unknown ticker in Robinhood. No claim of exchange-level verification; legacy positions remain editable. Duplicate ticker entry within a single IRA is blocked. Same ticker in a different IRA is allowed.
+- Screenshot review shows the known name and requests extra confirmation of symbols not in the directory.
+- Position preview uses entered manual price or available stored references. Family-level cache entries (if present) take priority in portfolio calculations; otherwise use recorded position price or recorded market value / shares. A reference from another visible IRA owned by the same member may be reused, without a new quote timestamp. No reference is copied to a different member.
+- Account, group and overview cards show known assets, with explicit partial-estimate labels if prices or cash are missing. Buying power is never substituted for cash, broker-reported total is separate. Missing references do not become zero.
+- No live price provider is connected. No new market data credentials or third-party quote calls. Manual references and previously recorded screenshot values remain available. A provider with permission for shared family display must be selected before live automatic quotes are enabled.
+- Existing login, RLS, RPC calls, import and settings remain unchanged. Continue to use synthetic data until two-member isolation testing is completed. Member enrollment, buy plans, email and push remain future integration stages.
